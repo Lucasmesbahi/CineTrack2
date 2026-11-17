@@ -1,4 +1,5 @@
-const API_URL = "https://raw.githubusercontent.com/ouchad97/cinetrack-api/main/cinetrack-data.json"
+const API_URL = "https://6afaf00b730c1d152f32c93a.mockapi.io/Contents"
+const DATA_URL = "https://raw.githubusercontent.com/ouchad97/cinetrack-api/main/cinetrack-data.json";
 
 export async function loadMovie(){
     try {
