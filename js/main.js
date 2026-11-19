@@ -1,4 +1,3 @@
-
 import { loadMovie, getFavorites, saveFavorites } from "./store.js";
 import { renderMovies } from "./render.js";
 import { modal } from "./modale.js";

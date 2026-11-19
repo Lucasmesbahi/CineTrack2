@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - CinéTrack</title>
+    <link rel="icon" type="image/png" href="./img/Logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-black ">
         <header class="bg-black border-b border-[#202027] " >
         <div class="max-w-7xl  px-4 sm:px-6 h-auto min-h-20 py-4 flex justify-between items-center gap-4">
             <div class="flex items-center gap-3 shrink-0">
@@ -14,9 +16,95 @@
                <h1 class="text-2xl font-bold text-[#FFFFFF] text-start" ><span class="text-red-500">Ciné</span>Track</h1>
         </div>
         </div>
-        <input id="search" type="text" class=" w-full sm:w-96 bg-[#131317] border border-[#24242B]  rounded-lg px-4 py-2 outline-none focus:border-[#E80E1B] text-white placeholder-[#9496A1] order-3 sm:order-2" placeholder="Rechercher un film, une série...">
+        <button id="admin" class="h-12 w-36 text-white bg-black rounded-2xl border-2 border-[#E80E1B] font-bold hover:bg-[#E80E1B]"> <a href="index.html" >Go Back</a></button>
 
     </div>
     </header>
+    <main class="flex-1 p-4 sm:p-6 lg:p-10">
+
+        <!-- ADD BUTTON -->
+        <div class="flex justify-end mb-5">
+            <button id="addBtn"
+                class="bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2 rounded transition">
+                Add +
+            </button>
+        </div>
+
+        <!-- FORM -->
+        <form id="contentForm"
+            class="hidden bg-[#161619] border border-red-800 rounded-lg p-5 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <h2 class="text-white font-bold text-xl sm:col-span-2">
+                Content Information
+            </h2>
+
+            <input type="text" id="title" placeholder="Title"
+                class="bg-black border border-red-800 rounded p-3 text-white outline-none">
+
+            <select id="type"
+                class="bg-black border border-red-800 rounded p-3 text-white outline-none">
+                <option value="">Choose type</option>
+                <option value="movie">Movie</option>
+                <option value="Series">Series</option>
+            </select>
+
+            <input type="number" id="releaseYear" placeholder="Release Year"
+                class="bg-black border border-red-800 rounded p-3 text-white outline-none">
+
+            <input type="number" id="seasons" placeholder="Number of Seasons"
+                class="bg-black border border-red-800 rounded p-3 text-white outline-none">
+
+            <input type="url" id="image" placeholder="Image URL"
+                class="bg-black border border-red-800 rounded p-3 text-white outline-none sm:col-span-2">
+
+            <textarea id="description" placeholder="Description" rows="3"
+                class="bg-black border border-red-800 rounded p-3 text-white outline-none sm:col-span-2"></textarea>
+
+            <input type="text" id="genres" placeholder="Genres (Action, Drama...)"
+                class="bg-black border border-red-800 rounded p-3 text-white outline-none sm:col-span-2">
+
+            <div class="flex gap-3 sm:col-span-2">
+                <button type="submit" id="submitBtn"
+                    class="bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2 rounded">
+                    Ajouter
+                </button>
+
+                <button type="button" id="cancelBtn"
+                    class="border border-gray-500 text-white px-5 py-2 rounded hover:bg-gray-700">
+                    Cancel
+                </button>
+            </div>
+
+        </form>
+
+        <!-- MESSAGE -->
+        <p id="message" class="text-red-500 text-sm mb-4"></p>
+
+        <!-- TABLE -->
+        <div class="bg-[#161619] p-4 w-full overflow-x-auto rounded-lg">
+
+            <table id="contentsTable" class="w-full text-left text-white border-collapse">
+
+                <thead class="bg-[#202024] text-gray-400 text-xs">
+                    <tr>
+                        <th class="p-4">TITLE</th>
+                        <th class="p-4">TYPE</th>
+                        <th class="p-4">YEAR</th>
+                        <th class="p-4">SEASONS</th>
+                        <th class="p-4">ACTIONS</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-sm"></tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <div class=" flex justify-center text-[#9496A1] p-5 pl-6 ">© 2026 CinéTrack - All rights reserved</div>
+    </footer>
 </body>
 </html>
