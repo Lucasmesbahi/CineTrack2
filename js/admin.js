@@ -85,7 +85,133 @@ cancelBtn.addEventListener("click", () => {
     form.classList.add("hidden");
 });
 
+async function saveContent(e) {
+    e.preventDefault();
 
+    const content = {
+        title: titleInput.value.trim(),
+        type: typeInput.value,
+        releaseYear: Number(yearInput.value),
+        seasons: seasonsInput.value ? Number(seasonsInput.value) : null,
+        image: imageInput.value.trim(),
+        description: descriptionInput.value.trim(),
+        genres: genresInput.value.split(",").map(genre => genre.trim()).filter(Boolean)
+    };
+
+    if (
+        !content.title ||
+        !content.type ||
+        !content.releaseYear ||
+        !content.image ||
+        !content.description
+    ) {
+        message.textContent = "Tous les champs obligatoires doivent être remplis.";
+        return;
+    }
+
+    if (content.type === "Series" && !content.seasons) {
+        message.textContent = "Le nombre de saisons est obligatoire pour une série.";
+        return;
+    }
+
+    const url = editId ? `${API_URL}/${editId}` : API_URL;
+    const method = editId ? "PUT" : "POST";
+
+    const successText = editId
+        ? "Contenu modifié avec succès."
+        : "Contenu ajouté avec succès.";
+
+    try {
+        const res = await fetch(url, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(content)
+        });
+
+        if (!res.ok) throw new Error(`Erreur ${res.status}`);
+
+        form.reset();
+        form.classList.add("hidden");
+
+        editId = null;
+        submitBtn.textContent = "Ajouter";
+
+        await loadContents();
+
+        message.textContent = successText;
+
+    } catch (err) {
+        message.textContent = "Échec de l'enregistrement : " + err.message;
+    }
+}
+
+tbody.addEventListener("click", async (e) => {
+
+    const tr = e.target.closest("tr");
+
+    if (!tr) return;
+
+    const id = tr.dataset.id;
+
+    if (e.target.classList.contains("edit")) {
+
+        try {
+            const res = await fetch(`${API_URL}/${id}`);
+
+            if (!res.ok) throw new Error(`Erreur ${res.status}`);
+
+            const content = await res.json();
+
+            titleInput.value = content.title;
+            typeInput.value = content.type;
+            yearInput.value = content.releaseYear;
+            seasonsInput.value = content.seasons ?? "";
+            imageInput.value = content.image;
+            descriptionInput.value = content.description;
+            genresInput.value = content.genres?.join(", ") ?? "";
+
+            editId = id;
+
+            submitBtn.textContent = "Enregistrer";
+
+            form.classList.remove("hidden");
+
+            titleInput.focus();
+
+        } catch (err) {
+            message.textContent = "Impossible de récupérer le contenu : " + err.message;
+        }
+    }
+
+    if (e.target.classList.contains("delete")) {
+
+        if (!confirm("Voulez-vous vraiment supprimer ce contenu ?")) return;
+
+        try {
+            const res = await fetch(`${API_URL}/${id}`, {
+                method: "DELETE"
+            });
+
+            if (!res.ok) throw new Error(`Erreur ${res.status}`);
+
+            if (id === editId) {
+                editId = null;
+                form.reset();
+                form.classList.add("hidden");
+                submitBtn.textContent = "Ajouter";
+            }
+
+            await loadContents();
+
+            message.textContent = "Contenu supprimé avec succès.";
+
+        } catch (err) {
+            message.textContent = "Échec de la suppression : " + err.message;
+        }
+    }
+});
 
 form.addEventListener("submit", saveContent);
 
