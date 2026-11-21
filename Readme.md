@@ -1,40 +1,94 @@
-# 🎬 CinéTrack
 
-CinéTrack est une application web qui permet de découvrir des films et des séries, rechercher des titres et ajouter des favoris.
+# 🎬 CinéTrack 2
 
-## Technologies
-- HTML
+## 📌 Présentation
+
+CinéTrack est une application web permettant de consulter et de gérer un catalogue de films et de séries.
+
+Cette deuxième version améliore la première en intégrant la gestion dynamique des contenus à travers une API MockAPI et JavaScript.
+
+## ✨ Fonctionnalités
+
+### Partie utilisateur
+- Affichage dynamique des films et séries.
+- Recherche par titre.
+- Filtrage par type : Films et Séries.
+- Pagination des contenus.
+- Gestion des favoris avec LocalStorage.
+- Affichage des détails des contenus avec une fenêtre modale.
+
+### Partie administration
+- Affichage des contenus depuis MockAPI (GET).
+- Ajout de nouveaux contenus (POST).
+- Modification des contenus (PUT).
+- Suppression des contenus (DELETE).
+- Gestion des formulaires.
+- Validation des champs obligatoires.
+
+## 🛠️ Technologies utilisées
+
+- HTML5
+- CSS3
 - Tailwind CSS
-- JavaScript
+- JavaScript (ES6+)
 - Fetch API
+- MockAPI
 - LocalStorage
 
-## 📂 Structure du projet
+## 📁 Structure du projet
 
-CineTrack/
+```text
+CinéTrack/
 │
 ├── index.html
+├── admin.html
 │
-├── img/
-│   └── Logo.png
-│
-└── js/
-    ├── main.js
-    ├── store.js
-    ├── render.js
-    └── modale.js
+└── src/
+    ├── img/
+    │
+    └── js/
+        ├── main.js
+        ├── admin.js
+        ├── store.js
+        ├── render.js
+        └── modale.js
+```
 
-## Fonctionnalités
-- Afficher les films et les séries.
-- Rechercher un film ou une série.
-- Filtrer par type
-- Consulter les détails d'un film.
-- Ajouter et supprimer des favoris.
-- Naviguer avec la pagination.
+## 🚀 Installation et lancement
 
-## Lancement
-Cloner le projet :
+1. Cloner le repository :
 
 ```bash
-git clone https://github.com/Lucasmesbahi/CineTrack.git
+git clone URL_DU_REPOSITORY
 ```
+
+2. Accéder au dossier du projet :
+
+```bash
+cd CinéTrack
+```
+
+3. Ouvrir le projet avec Visual Studio Code.
+
+4. Lancer `index.html` avec l'extension Live Server.
+
+## 🔗 API
+
+L'application utilise MockAPI pour récupérer et gérer les données des films et des séries.
+
+Les opérations CRUD sont réalisées avec Fetch API et les méthodes HTTP :
+
+- GET : récupérer les contenus.
+- POST : ajouter un contenu.
+- PUT : modifier un contenu.
+- DELETE : supprimer un contenu.
+
+## 👨‍💻 Auteur
+
+**Salaheddine Mesbahi**
+
+Projet réalisé dans le cadre de la formation YouCode.
+
+---
+
+© 2026 CinéTrack. Tous droits réservés.
